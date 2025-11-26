@@ -11,6 +11,9 @@
 <body>
     <h1>Test Nikke Utils - Show results</h1>
 
+    <h2>GetAllNikkes</h2>
+    <pre id="data-output-all-nikkes"></pre>
+
     <h2>GetNikkeByName</h2>
     <pre id="data-output"></pre>
 
@@ -31,6 +34,11 @@
 
         const allData = getAllNikkes();
         console.log('Toutes les Nikkes:', allData);
+        let allNikkes = "";
+        for (let i = 0; i < allData.length; i++) {
+            allNikkes += JSON.stringify(allData[i]) + "\n";
+        }
+        document.getElementById('data-output-all-nikkes').textContent = allNikkes;
 
         const rapi = getNikkeByName('Rapi');
         console.log('Rapi trouvée:', rapi);
@@ -38,7 +46,7 @@
         console.log('Liste complète des Nikkes (Taille) :', allData.length);
         console.log('Détails de Rapi (Objet) :', getNikkeByName('Rapi'));
 
-        document.getElementById('data-output').textContent = JSON.stringify(getNikkeByName('Modernia'), null, 2);
+        document.getElementById('data-output').textContent = JSON.stringify(getNikkeByName('Helm'), null, 2);
 
         const mesTirages = pullTen();
         console.log('Résultats Gacha (10 pull):', mesTirages);
