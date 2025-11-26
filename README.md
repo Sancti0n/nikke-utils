@@ -28,15 +28,15 @@ Le kit de développement (SDK) non-officiel et complet pour les développeurs tr
 
 ## 🇬🇧 Installation / 🇫🇷 Installation
 
-The package uses **ES Modules**. Ensure your project supports the `import` syntax.
-Le package utilise les **ES Modules**. Assurez-vous que votre projet prend en charge la syntaxe `import`.
+🇬🇧 The package uses **ES Modules**. Ensure your project supports the `import` syntax.  
+🇫🇷 Le package utilise les **ES Modules**. Assurez-vous que votre projet prend en charge la syntaxe `import`.
 
 ```bash
 npm install nikke-utils
 ```
 
 
-🇬🇧 You must import the specific named functions you intend to use.
+🇬🇧 You must import the specific named functions you intend to use.  
 🇫🇷 Vous devez importer les fonctions nommées spécifiques que vous souhaitez utiliser.
 
 ## 1. Data Management (Gestion des Données)
@@ -86,7 +86,7 @@ console.log(`Team Status: ${analysis.message}`);
 
 ## 🇬🇧 Detailed Function Documentation / 🇫🇷 Documentation Détaillée des Fonctions
 
-| Fonction | 🇺🇸 Description | 🇫🇷 Description | 🇺🇸 Arguments / 🇫🇷 Arguments | 🇺🇸 Returns / 🇫🇷 Retourne |
+| Fonction | 🇬🇧 Description | 🇫🇷 Description | 🇬🇧 Arguments / 🇫🇷 Arguments | 🇬🇧 Returns / 🇫🇷 Retourne |
 | :--- | :--- | :--- | :--- | :--- |
 | `getAllNikkes()` | Returns the complete array of Nikkes. | Retourne le tableau complet des Nikkes. | None / Aucun | `Array<Object>` |
 | `getNikkeByName(name)` | Searches for a Nikke by name. | Cherche un Nikke par son nom. | `string` | `Object` or `undefined` / `Object` ou `undefined` |
