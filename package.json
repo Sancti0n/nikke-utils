@@ -1,0 +1,12 @@
+{
+    "name": "nikke-utils",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "Un kit complet pour les développeurs Nikke: Goddess of Victory",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Sancti0n/nikke-utils.git"
+    },
+    "author": "Sancti0n",
+    "license": "MIT"
+}

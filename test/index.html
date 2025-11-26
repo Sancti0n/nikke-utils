@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="snow-white.ico">
+    <title>Ma page de test</title>
+</head>
+
+<body>
+    <h1>Test Nikke Utils - Show results</h1>
+
+    <h2>GetNikkeByName</h2>
+    <pre id="data-output"></pre>
+
+    <h2>PullTen</h2>
+    <p id="gacha-output"></p>
+
+    <h2>CheckFullBurst</h2>
+    <p id="team-output"></p>
+
+    <script type="module">
+
+        import {
+            getAllNikkes,
+            getNikkeByName,
+            pullTen,
+            checkFullBurst
+        } from '../index.js';
+
+        const allData = getAllNikkes();
+        console.log('Toutes les Nikkes:', allData);
+
+        const rapi = getNikkeByName('Rapi');
+        console.log('Rapi trouvée:', rapi);
+
+        console.log('Liste complète des Nikkes (Taille) :', allData.length);
+        console.log('Détails de Rapi (Objet) :', getNikkeByName('Rapi'));
+
+        document.getElementById('data-output').textContent = JSON.stringify(getNikkeByName('Modernia'), null, 2);
+
+        const mesTirages = pullTen();
+        console.log('Résultats Gacha (10 pull):', mesTirages);
+        console.log('Nombre de SSR obtenus :', mesTirages.filter(r => r === 'SSR').length);
+        document.getElementById('gacha-output').textContent = mesTirages.join(', ');
+
+        const neon = getNikkeByName('Neon');
+        const anis = getNikkeByName('Anis');
+        const modernia = getNikkeByName('Modernia');
+
+        const maTeamValide = [neon, anis, modernia, rapi];
+        const teamResult = checkFullBurst(maTeamValide);
+        console.log('Analyse de l\'équipe:', teamResult.message);
+
+        const teamIncomplete = [anis, modernia, getNikkeByName('Rapi')];
+        const incompleteResult = checkFullBurst(teamIncomplete);
+        console.log('Analyse Équipe Valide :', teamResult.message);
+        // 'Full Burst Ready!'
+        console.log('Analyse Équipe Incomplète :', incompleteResult.message);
+        //'Impossible de Full Burst. Manquant : Burst I'
+
+        document.getElementById('team-output').textContent = `Valide: ${teamResult.message} | Invalide: ${incompleteResult.message}`;
+
+    </script>
+</body>
+
+</html>
