@@ -1,6 +1,6 @@
 # nikke-utils
 
-[![npm version](https://badge.fury.io/js/nikke-utils.svg)](https://www.npmjs.com/package/nikke-utils) 
+[![npm version](https://badge.fury.io/js/@sancti0n/nikke-utils.svg)](https://www.npmjs.com/package/@sancti0n/nikke-utils)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
