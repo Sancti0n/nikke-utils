@@ -1,6 +1,6 @@
 {
-    "name": "nikke-utils",
-    "version": "1.0.2",
+    "name": "@sancti0n/nikke-utils",
+    "version": "1.0.4",
     "type": "module",
     "description": "Un kit complet pour les développeurs Nikke: Goddess of Victory",
     "repository": {
