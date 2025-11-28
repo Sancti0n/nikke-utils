@@ -32,7 +32,7 @@ Le kit de développement (SDK) non-officiel et complet pour les développeurs tr
 🇫🇷 Le package utilise les **ES Modules**. Assurez-vous que votre projet prend en charge la syntaxe `import`.
 
 ```bash
-npm install nikke-utils
+npm install @sancti0n/nikke-utils
 ```
 
 
