@@ -6,10 +6,108 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="snow-white.ico">
     <title>Ma page de test</title>
+    <style>
+        /* Styles généraux de la page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        #nikkes-table-container {
+            margin-top: 30px;
+        }
+
+        /* Styles de base du tableau */
+        .nikkes-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .nikkes-table th,
+        .nikkes-table td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        /* Styles des en-têtes (Statiques) */
+        .nikkes-table th {
+            background-color: #007bff;
+            color: white;
+            text-transform: uppercase;
+            user-select: none;
+            /* Empêche la sélection de texte */
+            transition: background-color 0.2s;
+        }
+
+        /* Lignes paires et survol général (non cliquable) */
+        .nikkes-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .nikkes-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* --- CORRECTION CLÉ : INTERACTIVITÉ SEULEMENT POUR NAME ET DATEADDED --- */
+
+        /* Curseur cliquable uniquement pour les colonnes triables */
+        .nikkes-table th[data-column="name"],
+        .nikkes-table th[data-column="dateAdded"] {
+            cursor: pointer;
+        }
+
+        /* Effet de survol (hover) uniquement pour les colonnes triables */
+        .nikkes-table th[data-column="name"]:hover,
+        .nikkes-table th[data-column="dateAdded"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Indicateurs de tri (visibles si la classe sorted-XX est appliquée par JS) */
+        .nikkes-table th.sorted-asc::after {
+            content: ' ▲';
+            /* Triangle Haut: Croissant */
+            font-size: 0.8em;
+            vertical-align: super;
+        }
+
+        .nikkes-table th.sorted-desc::after {
+            content: ' ▼';
+            /* Triangle Bas: Décroissant */
+            font-size: 0.8em;
+            vertical-align: super;
+        }
+
+        /* Styles spécifiques à la rareté */
+        .rarity-SSR {
+            color: #ffbf00;
+            font-weight: bold;
+        }
+
+        /* Or */
+        .rarity-SR {
+            color: #6a0dad;
+            font-weight: bold;
+        }
+
+        /* Violet */
+        .rarity-R {
+            color: #008000;
+            font-weight: bold;
+        }
+
+        /* Vert */
+    </style>
 </head>
 
 <body>
     <h1>Test Nikke Utils - Show results</h1>
+
+    <div id="nikkes-table-container">
+    </div>
 
     <h2>GetAllNikkes</h2>
     <pre id="data-output-all-nikkes"></pre>
@@ -31,6 +129,150 @@
             pullTen,
             checkFullBurst
         } from '../index.js';
+
+        let currentNikkesData = [];
+        let sortColumn = 'name'; // Tri par défaut sur 'name'
+        let sortDirection = 'asc';
+
+        // Définir les colonnes à afficher (y compris les colonnes triables)
+        const columns = ['id', 'name', 'rarity', 'burst', 'element', 'manufacturer', 'class', 'weapon', 'squad', 'specialties', 'treasure', 'reEnterBurstSkill', 'canChangeBurstStageThreeToOne', 'dateAdded'];
+
+        // ----------------------------------------------------
+        // LOGIQUE DE TRI
+        // ----------------------------------------------------
+
+        function sortData(column, direction) {
+            const sortedData = [...currentNikkesData];
+
+            sortedData.sort((a, b) => {
+                let comparison = 0;
+                let aVal = a[column] || '';
+                let bVal = b[column] || '';
+
+                if (column === 'dateAdded') {
+                    // 1. Traitement spécifique pour les dates
+                    const aTime = new Date(aVal).getTime();
+                    const bTime = new Date(bVal).getTime();
+
+                    comparison = aTime - bTime;
+
+                    // 2. Tri secondaire par NOM si les dates sont identiques
+                    if (comparison === 0) {
+                        return a.name.localeCompare(b.name);
+                    }
+
+                } else {
+                    // Traitement par défaut (alphabétique pour 'name')
+                    comparison = aVal.localeCompare(bVal);
+                }
+
+                return direction === 'asc' ? comparison : comparison * -1;
+            });
+
+            return sortedData;
+        }
+
+        // Fonction appelée lors du clic sur l'en-tête
+        function sortNikkesTable(event) {
+            const newColumn = event.currentTarget.getAttribute('data-column');
+
+            if (newColumn === sortColumn) {
+                sortDirection = (sortDirection === 'asc') ? 'desc' : 'asc';
+            } else {
+                sortColumn = newColumn;
+                sortDirection = 'asc';
+            }
+
+            // Mettre à jour et re-dessiner le tableau
+            currentNikkesData = sortData(sortColumn, sortDirection);
+            renderTable(currentNikkesData, sortColumn, sortDirection);
+        }
+        // ----------------------------------------------------
+        // LOGIQUE DE RENDU DU TABLEAU
+        // ----------------------------------------------------
+
+        function renderTable(data, sortedCol, sortedDir) {
+            const container = document.getElementById('nikkes-table-container');
+            container.innerHTML = ''; // Nettoyer le conteneur
+
+            if (!data || data.length === 0) {
+                container.innerHTML = '<p>Aucune donnée de Nikke trouvée.</p>';
+                return;
+            }
+
+            let html = '<table class="nikkes-table"><thead><tr>';
+
+            // Création de l'en-tête
+            columns.forEach(col => {
+                const headerText = col.charAt(0).toUpperCase() + col.slice(1);
+
+                let className = '';
+                if (col === sortedCol) { // Si c'est la colonne triée
+                    className = `sorted-${sortedDir}`; // Applique la classe sorted-asc ou sorted-desc
+                }
+
+                // Ajout de l'attribut data-column pour le tri
+                html += `<th data-column="${col}" class="${className}">${headerText}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+
+            // Création des lignes du tableau (inchangé)
+            data.forEach(nikke => {
+                html += '<tr>';
+
+                columns.forEach(col => {
+                    let cellContent = nikke[col] || '-';
+                    //console.log(cellContent)
+                    if (typeof cellContent == 'object') {
+                        console.log(cellContent)
+                        cellContent = Object.values(cellContent).join(",<br/> ")
+                    }
+                    let className = '';
+
+                    if (col === 'rarity') {
+                        className = `rarity-${nikke[col]}`;
+                    }
+
+                    html += `<td class="${className}">${cellContent}</td>`;
+                });
+
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+
+            // 3. Attacher les écouteurs d'événements APRÈS l'insertion du HTML
+            // SÉLECTIONNE UNIQUEMENT LES COLONNES DEMANDÉES (name et dateAdded)
+            const headers = container.querySelectorAll('th[data-column="name"], th[data-column="dateAdded"]');
+
+            // Attache les événements de clic
+            headers.forEach(header => {
+                // Ajoute la classe cliquable pour le style (optionnel si le CSS est bien ciblé)
+                header.classList.add('sortable-header');
+                header.addEventListener('click', sortNikkesTable);
+            });
+
+            // Mettre à jour l'état de la console si nécessaire
+            console.log(`Tableau affiché. Tri actuel: ${sortedCol} (${sortedDir})`);
+        }
+
+        // ----------------------------------------------------
+        // INITIALISATION
+        // ----------------------------------------------------
+
+        // Récupérer les données initiales
+        currentNikkesData = getAllNikkes();
+
+        // Trier les données initiales
+        currentNikkesData = sortData(sortColumn, sortDirection);
+
+        // Rendre le tableau initial
+        renderTable(currentNikkesData, sortColumn, sortDirection);
+
+        // ----------------------------------------------------
+        // CONSOLE LOGS (Optionnel - Pour vérifier les données)
+        // ----------------------------------------------------
 
         const allData = getAllNikkes();
         console.log('Toutes les Nikkes:', allData);
