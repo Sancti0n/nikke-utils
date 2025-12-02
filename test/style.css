@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f9;
+}
+
+#nikkes-table-container {
+    margin-top: 30px;
+}
+
+/* Styles de base du tableau */
+.nikkes-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.nikkes-table th,
+.nikkes-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+/* Styles des en-têtes (Statiques) */
+.nikkes-table th {
+    background-color: #007bff;
+    color: white;
+    text-transform: uppercase;
+    user-select: none;
+    /* Empêche la sélection de texte */
+    transition: background-color 0.2s;
+}
+
+/* Lignes paires et survol général (non cliquable) */
+.nikkes-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.nikkes-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* --- CORRECTION CLÉ : INTERACTIVITÉ SEULEMENT POUR NAME ET DATEADDED --- */
+
+/* Curseur cliquable uniquement pour les colonnes triables */
+.nikkes-table th[data-column="name"],
+.nikkes-table th[data-column="dateAdded"] {
+    cursor: pointer;
+}
+
+/* Effet de survol (hover) uniquement pour les colonnes triables */
+.nikkes-table th[data-column="name"]:hover,
+.nikkes-table th[data-column="dateAdded"]:hover {
+    background-color: #0056b3;
+}
+
+/* Indicateurs de tri (visibles si la classe sorted-XX est appliquée par JS) */
+.nikkes-table th.sorted-asc::after {
+    content: ' ▲';
+    /* Triangle Haut: Croissant */
+    font-size: 0.8em;
+    vertical-align: super;
+}
+
+.nikkes-table th.sorted-desc::after {
+    content: ' ▼';
+    /* Triangle Bas: Décroissant */
+    font-size: 0.8em;
+    vertical-align: super;
+}
+
+/* Styles spécifiques à la rareté */
+.rarity-SSR {
+    color: #ffbf00;
+    font-weight: bold;
+}
+
+/* Or */
+.rarity-SR {
+    color: #6a0dad;
+    font-weight: bold;
+}
+
+/* Violet */
+.rarity-R {
+    color: #008000;
+    font-weight: bold;
+}
