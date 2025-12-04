@@ -176,6 +176,7 @@ const characters = [
     { id: 173, name: "Yuni", rarity: "SSR", burst: "II", element: "Fire", manufacturer: "Missilis Industry", class: "Defender", weapon: "Rocket Launcher", squad: "Wardress", specialties: { 1: "Buffer", 2: "Crowd Controller", 3: "Debuffer", 4: "Healer" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "II": 20 }, dateAdded: "2022-11-04" },
     { id: 174, name: "Zwei", rarity: "SSR", burst: "I", element: "Electric", manufacturer: "Elysion", class: "Supporter", weapon: "Shotgun", squad: "School Circle", specialties: { 1: "Buffer", 2: "Cover Heal", 3: "Pierce" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "I": 20 }, dateAdded: "2024-08-08" },
     { id: 175, name: "Chime", rarity: "SSR", burst: "II", element: "Iron", manufacturer: "Pilgrim", class: "Supporter", weapon: "Sub Machine Gun", squad: "White Knight", specialties: { 1: "Buffer" }, treasure: "no", reEnterBurstSkill: "yes", canChangeBurstStageThreeToOne: "no", cooldown: { "II": 20 }, dateAdded: "2025-10-30" },
+    { id: 176, name: "Diesel: Winter Sweets", rarity: "SSR", burst: "III", element: "Fire", manufacturer: "Elysion", class: "Attacker", weapon: "Rocket Launcher", squad: "Infinity Rail", specialties: {}, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "III": 40 }, dateAdded: "2025-12-04" },
 ];
 
 export function getAllNikkes() {
@@ -186,11 +187,21 @@ export function getNikkeByName(name) {
     return characters.find(char => char.name.toLowerCase() === name.toLowerCase());
 }
 
-export function getAllElementOfThisField(array, field) {
+export function getAllElementOfThisField(field) {
     let t = [];
-    for (let i = 0; i < array.length; i++) {
-        if (t.indexOf(array[i][field]) < 0) {
-            t.push(array[i][field]);
+    for (let i = 0; i < characters.length; i++) {
+        if (t.indexOf(characters[i][field]) < 0) {
+            t.push(characters[i][field]);
+        }
+    }
+    return t
+}
+
+export function getSpecialties(specialties) {
+    let t = [];
+    for (let i = 0; i < characters.length; i++) {
+        if (Object.values(characters[i]["specialties"]).indexOf(specialties) > -1) {
+            t.push(characters[i]);
         }
     }
     return t
