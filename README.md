@@ -18,10 +18,11 @@ Le kit de développement (SDK) non-officiel et complet pour les développeurs tr
 ## 🇬🇧 Key Features / 🇫🇷 Fonctionnalités Clés
 
 * **🇺🇸 Data Explorer:** Direct access to Nikke stats, Burst levels, and affiliations.
-* **🇫🇷 Exploration des Données :** Accès direct aux statistiques, aux niveaux de Burst et aux affiliations des Nikkes.
 * **🇺🇸 Gacha Simulator:** Simulation of pulls based on the official drop rates.
-* **🇫🇷 Simulateur Gacha :** Simulation des tirages basée sur les taux de drop officiels.
 * **🇺🇸 Team Synergy Checker:** Tool to validate team compositions (I-II-III Burst chains).
+
+* **🇫🇷 Exploration des Données :** Accès direct aux statistiques, aux niveaux de Burst et aux affiliations des Nikkes.
+* **🇫🇷 Simulateur Gacha :** Simulation des tirages basée sur les taux de drop officiels.
 * **🇫🇷 Vérificateur de Synergie :** Outil pour valider la composition des équipes (chaînes de Burst I-II-III).
 
 ---
