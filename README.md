@@ -94,3 +94,5 @@ console.log(`Team Status: ${analysis.message}`);
 | `pullOne()` | Simulates a single pull. | Simule un tirage simple. | None / Aucun | `string` ('SSR', 'SR' or 'R') |
 | `pullTen()` | Simulates ten pulls. | Simule dix tirages. | None / Aucun | `Array<string>` |
 | `checkFullBurst(teamArray)`| Validates if the team contains all three Burst levels. | Valide si l'équipe contient les trois niveaux de Burst. | `Array<Object>` (characters) / `Array<Object>` (personnages) | `Object` ({ valid: bool, message: string }) |
+| `getAllElementOfThisField` | Return all Nikkes with this field | Retourne toutes les Nikkes avec ce champ | `string` | `Array<string>` |
+| `getSpecialties` | Return all Nikkes with this specialtie | Retourne toutes les Nikkes avec cette spécialité | `string` | `Array<string>` |

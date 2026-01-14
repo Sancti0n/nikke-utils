@@ -179,6 +179,7 @@ const characters = [
     { id: 176, name: "Diesel: Winter Sweets", rarity: "SSR", burst: "III", element: "Fire", manufacturer: "Elysion", class: "Attacker", weapon: "Rocket Launcher", squad: "Infinity Rail", specialties: { 1: "Debuffer", 2: "Stack Oriented" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "III": 40 }, dateAdded: "2025-12-04" },
     { id: 177, name: "Brid: Silent Track", rarity: "SSR", burst: "II", element: "Fire", manufacturer: "Elysion", class: "Supporter", weapon: "Shotgun", squad: "Infinity Rail", specialties: { 1: "Buffer", 2: "Debuffer", 3: "Stack Oriented" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "II": 20 }, dateAdded: "2025-12-11" },
     { id: 178, name: "Snow White: Heavy Arms", rarity: "SSR", burst: "III", element: "Water", manufacturer: "Pilgrim", class: "Attacker", weapon: "Sniper Rifle", squad: "Goddess", specialties: { 1: "Debuffer", 2: "Pierce", 3: "Screen Wipe" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "III": 40 }, dateAdded: "2025-12-31" },
+    { id: 179, name: "Label", rarity: "SSR", burst: "I", element: "Iron", manufacturer: "Elysion", class: "Defender", weapon: "Assault Rifle", squad: "Best Seller", specialties: {}, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "I": 20 }, dateAdded: "2026-01-15" },
 ];
 
 export function getAllNikkes() {
