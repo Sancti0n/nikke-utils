@@ -8,5 +8,10 @@
         "url": "git+https://github.com/Sancti0n/nikke-utils.git"
     },
     "author": "Sancti0n",
-    "license": "MIT"
+    "license": "MIT",
+    "keywords": [
+        "javascript",
+        "data",
+        "nikke"
+    ]
 }
