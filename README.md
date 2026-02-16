@@ -2,6 +2,8 @@
 
 [![npm version](https://badge.fury.io/js/@sancti0n%2Fnikke-utils.svg)](https://www.npmjs.com/package/@sancti0n/nikke-utils)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub](https://img.shields.io/badge/Source-GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/Sancti0n/nikke-utils)
+[![GitLab](https://img.shields.io/badge/Miroir-GitLab-FC6D26?style=flat&logo=gitlab&logoColor=white)](https://gitlab.com/Sancti0n/nikke-utils)
 
 ---
 

@@ -5,7 +5,13 @@
     "description": "Un kit complet pour les développeurs Nikke: Goddess of Victory",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Sancti0n/nikke-utils.git"
+        "url": "git+https://github.com/Sancti0n/nikke-utils.git",
+        "directory": "",
+        "comment": "Available on Gitlab too / Miroir disponible sur GitLab",
+        "urls": [
+            "https://github.com/Sancti0n/nikke-utils.git",
+            "https://gitlab.com/Sancti0n/nikke-utils"
+        ]
     },
     "author": "Sancti0n",
     "license": "MIT",
