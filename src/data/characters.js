@@ -185,8 +185,8 @@ const characters = [
     { id: 182, name: "Takina Inoue", rarity: "SSR", burst: "II", element: "Iron", manufacturer: "Abnormal", class: "Supporter", weapon: "Sniper Rifle", squad: "Café LycoReco", specialties: { 1: "Buffer", 2: "Crowd Controller", 3: "Debuffer", 4: "True Damage" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "II": 20 }, dateAdded: "2026-02-18" },
     { id: 183, name: "Kurumi", rarity: "SR", burst: "I", element: "Iron", manufacturer: "Abnormal", class: "Supporter", weapon: "Assault Rifle", squad: "Café LycoReco", specialties: { 1: "Debuffer" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "I": 20 }, dateAdded: "2026-02-12" },
     { id: 184, name: "E.H.", rarity: "SSR", burst: "III", element: "Wind", manufacturer: "Elysion", class: "Attacker", weapon: "Sub Machine Gun", squad: "Exotic", specialties: { 1: "Stack Oriented" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "III": 40 }, dateAdded: "2026-03-05" },
-    { id: 185, name: "Arcana: Fortune Mate", rarity: "SSR", burst: "II", element: "Fire", manufacturer: "Elysion", class: "Attacker", weapon: "Shotgun", squad: "Best Seller", specialties: { 1: "Buffer", 2: "Screen Wipe", 3: "Stack Oriented" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "II": 20 }, dateAdded: "2026-03-19" }
-
+    { id: 185, name: "Arcana: Fortune Mate", rarity: "SSR", burst: "II", element: "Fire", manufacturer: "Elysion", class: "Attacker", weapon: "Shotgun", squad: "Best Seller", specialties: { 1: "Buffer", 2: "Screen Wipe", 3: "Stack Oriented" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "II": 20 }, dateAdded: "2026-03-19" },
+    { id: 186, name: "Snow Crane", rarity: "SSR", burst: "", element: "Water", manufacturer: "Missilis Industry", class: "Defender", weapon: "", squad: "Veiled Order", specialties: {}, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: {}, dateAdded: "2026-04-09" }
 ];
 
 export function getAllNikkes() {
