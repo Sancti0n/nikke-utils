@@ -1,0 +1,13 @@
+# Tests et CI
+tests/
+.github/
+.gitlab-ci.yml
+
+# Développement
+.vscode/
+*.log
+.env
+
+# Fichiers de configuration Git (souvent exclus par défaut, mais au cas où)
+.gitignore
+.git/
