@@ -190,8 +190,8 @@ const characters = [
     { id: 187, name: "Anis: Star", rarity: "SSR", burst: "I", element: "Electric", manufacturer: "Tetra Line", class: "Defender", weapon: "Rocket Launcher", squad: "Counters", specialties: { 1: "Buffer", 2: "Burst CD Reduction", 3: "Healer" }, treasure: "no", reEnterBurstSkill: "yes", canChangeBurstStageThreeToOne: "no", cooldown: { "I": 20 }, dateAdded: "2026-04-23" },
     { id: 188, name: "Avistar", rarity: "SSR", burst: "I", element: "Electric", manufacturer: "Elysion", class: "Supporter", weapon: "Machine Gun", squad: "Overseer", specialties: { 1: "Buffer", 2: "Healer" }, treasure: "no", reEnterBurstSkill: "yes", canChangeBurstStageThreeToOne: "no", cooldown: { "I": 20 }, dateAdded: "2026-04-23" },
     { id: 189, name: "Neon: Vision Eye", rarity: "SSR", burst: "III", element: "Electric", manufacturer: "Missilis Industry", class: "Attacker", weapon: "Rocket Launcher", squad: "Counters", specialties: { 1: "Stack Oriented" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "III": 40 }, dateAdded: "2026-04-30" },
-    { id: 190, name: "Mint", rarity: "SSR", burst: "II", element: "Iron", manufacturer: "Tetra Line", class: "Supporter", weapon: "Rocket Launcher", squad: "", specialties: { 1: "" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "II": 20 }, dateAdded: "2026-05-14" }
-
+    { id: 190, name: "Mint", rarity: "SSR", burst: "II", element: "Iron", manufacturer: "Tetra Line", class: "Supporter", weapon: "Rocket Launcher", squad: "T.T. STAR", specialties: { 1: "" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "II": 20 }, dateAdded: "2026-05-14" },
+    { id: 191, name: "Prika", rarity: "SSR", burst: "II", element: "Water", manufacturer: "Tetra Line", class: "Supporter", weapon: "Sniper Rifle", squad: "T.T. STAR", specialties: { 1: "" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "II": 40 }, dateAdded: "2026-05-28" }
 ];
 
 export function getAllNikkes() {
