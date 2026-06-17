@@ -192,8 +192,7 @@ const characters = [
     { id: 189, name: "Neon: Vision Eye", rarity: "SSR", burst: "III", element: "Electric", manufacturer: "Missilis Industry", class: "Attacker", weapon: "Rocket Launcher", squad: "Counters", specialties: { 1: "Stack Oriented" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "III": 40 }, dateAdded: "2026-04-30" },
     { id: 190, name: "Mint", rarity: "SSR", burst: "II", element: "Iron", manufacturer: "Tetra Line", class: "Supporter", weapon: "Rocket Launcher", squad: "T.T. STAR", specialties: { 1: "Buffer", 2: "Healer" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "II": 20 }, dateAdded: "2026-05-14" },
     { id: 191, name: "Prika", rarity: "SSR", burst: "II", element: "Water", manufacturer: "Tetra Line", class: "Supporter", weapon: "Sniper Rifle", squad: "T.T. STAR", specialties: { 1: "Buffer", 2: "Healer", 3: "Pierce" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "II": 40 }, dateAdded: "2026-05-28" },
-    { id: 192, name: "Ark Ranger Black", rarity: "SSR", burst: "", element: "", manufacturer: "", class: "", weapon: "", squad: "", specialties: {}, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: {}, dateAdded: "2026-06-11" },
-
+    { id: 192, name: "Ark Ranger Black", rarity: "SSR", burst: "III", element: "Wind", manufacturer: "Tetra Line", class: "Attacker", weapon: "Assault Rifle", squad: "Ark Rangers", specialties: { 1: "Buffer", 2: "Debuffer", 3: "Screen Wipe" }, treasure: "no", reEnterBurstSkill: "no", canChangeBurstStageThreeToOne: "no", cooldown: { "III": 40 }, dateAdded: "2026-06-11" },
 ];
 
 export function getAllNikkes() {
