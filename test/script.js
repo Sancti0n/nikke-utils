@@ -1,6 +1,9 @@
 import {
     getAllNikkes,
     getNikkeByName,
+    getAllSpecialties,
+    getAllNikkesWithThisSpecialtie,
+    getSpecialties,
     pullTen,
     checkFullBurst
 } from '../index.js';
@@ -99,7 +102,7 @@ function renderTable(data, sortedCol, sortedDir) {
             let cellContent = nikke[col] || '-';
             //console.log(cellContent)
             if (typeof cellContent == 'object') {
-                console.log(cellContent)
+                //console.log(cellContent)
                 cellContent = Object.values(cellContent).join(",<br/> ")
             }
             let className = '';
@@ -149,6 +152,7 @@ renderTable(currentNikkesData, sortColumn, sortDirection);
 // CONSOLE LOGS (Optionnel - Pour vérifier les données)
 // ----------------------------------------------------
 
+// getAllNikke()
 const allData = getAllNikkes();
 console.log('Toutes les Nikkes:', allData);
 let allNikkes = "";
@@ -157,6 +161,23 @@ for (let i = 0; i < allData.length; i++) {
 }
 document.getElementById('data-output-all-nikkes').textContent = allNikkes;
 
+// getNikkeByName()
+let name = "Rapi";
+document.getElementById('data-output').textContent = `On a mis en argument ${name} : \n` + JSON.stringify(getNikkeByName(name));
+
+// getAllSpecialties()
+document.getElementById('data-output-all-specialties').textContent = JSON.stringify(getAllSpecialties(allData));
+
+// getAllElementOfThisField()
+let field = "Pierce"
+let liste = getAllNikkesWithThisSpecialtie(field);
+allNikkes = "";
+for (let i = 0; i < liste.length; i++) {
+    allNikkes += JSON.stringify(liste[i]) + "\n";
+}
+document.getElementById('data-output-all-nikke-with-this-specialtie').textContent = allNikkes;
+
+/*
 const rapi = getNikkeByName('Rapi');
 console.log('Rapi trouvée:', rapi);
 
@@ -174,6 +195,7 @@ const neon = getNikkeByName('Neon');
 const anis = getNikkeByName('Anis');
 const modernia = getNikkeByName('Modernia');
 
+
 const maTeamValide = [neon, anis, modernia, rapi];
 const teamResult = checkFullBurst(maTeamValide);
 console.log('Analyse de l\'équipe:', teamResult.message);
@@ -185,4 +207,6 @@ console.log('Analyse Équipe Valide :', teamResult.message);
 console.log('Analyse Équipe Incomplète :', incompleteResult.message);
 //'Impossible de Full Burst. Manquant : Burst I'
 
+
 document.getElementById('team-output').textContent = `Valide: ${teamResult.message} | Invalide: ${incompleteResult.message}`;
+*/
