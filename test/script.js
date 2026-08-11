@@ -3,7 +3,7 @@ import {
     getNikkeByName,
     getAllSpecialties,
     getAllNikkesWithThisSpecialtie,
-    getSpecialties,
+    getAllNikkesWithThisField,
     pullTen,
     checkFullBurst
 } from '../index.js';
@@ -169,13 +169,24 @@ document.getElementById('data-output').textContent = `On a mis en argument ${nam
 document.getElementById('data-output-all-specialties').textContent = JSON.stringify(getAllSpecialties(allData));
 
 // getAllElementOfThisField()
-let field = "Pierce"
+let field = "Pierce";
 let liste = getAllNikkesWithThisSpecialtie(field);
 allNikkes = "";
 for (let i = 0; i < liste.length; i++) {
     allNikkes += JSON.stringify(liste[i]) + "\n";
 }
 document.getElementById('data-output-all-nikke-with-this-specialtie').textContent = allNikkes;
+
+// getAllNikkesWithThisField()
+let champ1 = "element";
+let champ2 = "Fire";
+let listeGetAllNikkesWithThisField = getAllNikkesWithThisField(champ1, champ2)
+let stGetAllNikkesWithThisField = "";
+for (let i = 0; i < listeGetAllNikkesWithThisField.length; i++) {
+    stGetAllNikkesWithThisField += JSON.stringify(listeGetAllNikkesWithThisField[i]) + "\n";
+}
+document.getElementById('data-output-all-nikke-with-this-field').textContent = stGetAllNikkesWithThisField;
+
 
 /*
 const rapi = getNikkeByName('Rapi');

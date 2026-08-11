@@ -210,12 +210,14 @@ export function getNikkeByName(name) {
     return characters.find(char => char.name.toLowerCase() === name.toLowerCase());
 }
 
-export function getAllSpecialties(characters) {
-    let t = [];
-    for (let i = 0; i < characters.length; i++) {
-        for (let spe in characters[i].specialties) {
-            let value = characters[i].specialties[spe];
-            if (t.indexOf(value) < 0) {
+export function getAllSpecialties() {
+    const t = [];
+    const lenCharacters = characters.length;
+    for (let i = 0; i < lenCharacters; i++) {
+        const specs = characters[i].specialties;
+        for (const spe in specs) {
+            const value = specs[spe];
+            if (!t.includes(value)) {
                 t.push(value);
             }
         }
@@ -223,24 +225,29 @@ export function getAllSpecialties(characters) {
     return t;
 }
 
-export function getAllNikkesWithThisSpecialtie(specialtie) {
-    let t = [];
-    for (let i = 0; i < characters.length; i++) {
-        for (const key in characters[i].specialties) {
-            if (characters[i].specialties[key] === specialtie) {
+export function getAllNikkesWithThisSpecialtie(specialty) {
+    const t = [];
+    const lenCharacters = characters.length;
+    for (let i = 0; i < lenCharacters; i++) {
+        const specs = characters[i].specialties;
+        for (const key in specs) {
+            if (specs[key] === specialty) {
                 t.push(characters[i]);
+                break;
             }
         }
     }
     return t;
 }
 
-export function getSpecialties(specialties) {
-    let t = [];
-    for (let i = 0; i < characters.length; i++) {
-        if (Object.values(characters[i]["specialties"]).indexOf(specialties) > -1) {
+export function getAllNikkesWithThisField(type, field) {
+    const t = [];
+    const lenCharacters = characters.length;
+    for (let i = 0; i < lenCharacters; i++) {
+        console.log(characters[i][type])
+        if (characters[i][type] == field) {
             t.push(characters[i]);
         }
     }
-    return t;
+    return t
 }
