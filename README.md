@@ -99,3 +99,90 @@ console.log(`Team Status: ${analysis.message}`);
 | `getAllSpecialties` | Returns an array of all specialities | Retourne un tableau de toutes les spécialités | `string` | `Array<string>` |
 | `getAllNikkesWithThisSpecialtie` | Return all Nikkes with this specialty | Retourne toutes les Nikkes avec cette spécialité | `string` | `Array<string>` |
 | `getAllNikkesWithThisField` | Returns all Nikkes with a key and a value | Retourne toutes les Nikkes avec une clé et une valeur | `string` | `Array<string>` |
+
+## 🇬🇧 Specialties & Tags Reference Guide | 🇫🇷 Guide de Référence des Spécialités et Tags
+
+🇬🇧 Below is the complete list of combat specialties and tags recognized by `nikke-utils`. Use these exact strings with `getAllNikkesWithThisSpecialtie()`.  
+🇫🇷 Ci-dessous se trouve la liste complète des spécialités de combat et tags reconnus par `nikke-utils`. Utilisez ces chaînes exactes avec `getAllNikkesWithThisSpecialtie()`.
+
+### Sustained Damage Meta (Méta Dégâts Continus)
+* **`Sustained DoT Dealer`**
+    * 🇬🇧 Applies Damage over Time (DoT) effects (Burn, Poison, Hacked, etc.) to enemies every second.
+    * 🇫🇷 Inflige des dégâts continus (DoT) aux ennemis à intervalles réguliers (Brûlure, Poison, etc.).
+* **`Sustained Self Buffer`**
+    * 🇬🇧 Boosts own Sustained Damage stats (`Sustained Damage ▲`) to amplify personal DoT ticks.
+    * 🇫🇷 Augmente sa propre statistique de dégâts continus pour démultiplier la puissance de ses propres tics.
+* **`Sustained Team Buffer`**
+    * 🇬🇧 Grants a team-wide or ally-specific `Sustained Damage ▲` buff to empower the whole team's DoT output.
+    * 🇫🇷 Accorde un bonus de dégâts continus à toute l'équipe pour amplifier les tics de tous les alliés.
+* **`Sustained Damage Reducer`**
+    * 🇬🇧 Reduces incoming Sustained Damage (`Sustained Damage ▼`) inflicted by enemies on allies.
+    * 🇫🇷 Réduit les dégâts continus subis par l'équipe (contre les brûlures ou poisons des boss).
+
+### Special Damage Types (Types de Dégâts Spéciaux)
+* **`Pierce`**
+    * 🇬🇧 Attacks penetrate through multiple enemies/parts.
+    * 🇫🇷 Transperce les ennemis et parties.
+* **`True Damage`**
+    * 🇬🇧 Deals raw damage bypassing enemy DEF.
+    * 🇫🇷 Inflige des dégâts bruts ignorant la DEF.
+* **`Distributed Damage`**
+    * 🇬🇧 Deals damage divided equally among hit targets.
+    * 🇫🇷 Inflige des dégâts répartis équitablement.
+* **`Buffer Distributed Damage`**
+    * 🇬🇧 Boosts allies' Distributed Damage output.
+    * 🇫🇷 Augmente les dégâts répartis des alliés.
+
+### Defense, Healing & Survival (Défense, Soins & Survie)
+* **`Healer`**
+    * 🇬🇧 Restores HP to self or allies.
+    * 🇫🇷 Restaure les points de vie (HP) des alliés.
+* **`Cover Heal`**
+    * 🇬🇧 Restores or repairs Cover HP.
+    * 🇫🇷 Régénère ou répare la couverture/l'abri.
+* **`Shielder`**
+    * 🇬🇧 Creates a shield absorbing incoming damage.
+    * 🇫🇷 Génère un bouclier d'absorption.
+* **`Cleanser`**
+    * 🇬🇧 Dispels debuffs from allies.
+    * 🇫🇷 Purifie et retire les malus de l'équipe.
+* **`Revive`**
+    * 🇬🇧 Resurrects a fallen ally during battle.
+    * 🇫🇷 Réanime un allié tombé au combat.
+
+### Buffs, Utility & Synergies (Support, Utilité & Synergies)
+* **`Buffer`**
+    * 🇬🇧 Increases stats or capabilities of allies.
+    * 🇫🇷 Boost les statistiques des alliés.
+* **`Debuffer`**
+    * 🇬🇧 Applies negative status effects to enemies.
+    * 🇫🇷 Applique des malus aux ennemis.
+* **`Burst CD Reduction`**
+    * 🇬🇧 Reduces Burst Skill cooldowns for faster rotations.
+    * 🇫🇷 Réduit le temps de recharge des Bursts.
+* **`Buff Time Alteration`**
+    * 🇬🇧 Extends or modifies active buff durations.
+    * 🇫🇷 Prolonge ou modifie la durée des buffs.
+* **`Stack Oriented`**
+    * 🇬🇧 Accumulates charges over time to unlock full power.
+    * 🇫🇷 Accumule des charges (stacks) séquentiellement.
+* **`Elemental DPS Self`**
+    * 🇬🇧 Increases personal damage against weak element.
+    * 🇫🇷 Boost ses dégâts élémentaires personnels.
+* **`Elemental DPS Buffer`**
+    * 🇬🇧 Grants elemental damage buffs to allies.
+    * 🇫🇷 Confère des buffs élémentaires à l'équipe.
+
+### Control & Aggro Management (Contrôle & Gestion du Terrain)
+* **`Screen Wipe`**
+    * 🇬🇧 Deals large AoE damage clearing all mobs instantly.
+    * 🇫🇷 Dégâts de zone (AoE) nettoyant l'écran.
+* **`Taunter`**
+    * 🇬🇧 Forces enemies to target this unit.
+    * 🇫🇷 Attire les tirs ennemis (provocation/agro).
+* **`Decoy`**
+    * 🇬🇧 Summons a targetable illusion to draw enemy attacks.
+    * 🇫🇷 Invoque un leurre pour détourner les tirs.
+* **`Crowd Controller`**
+    * 🇬🇧 Restricts enemy actions or mobility (Stun, Repulsion).
+    * 🇫🇷 Entrave les mouvements/actions des ennemis.
