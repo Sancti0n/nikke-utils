@@ -1,5 +1,123 @@
 // index.js
 
-export * from './src/data/characters.js';
-export * from './src/gacha/simulator.js';
-export * from './src/team/synergy.js';
+import { getAllNikkes } from './src/data/characters.js';
+
+console.log(getAllNikkes())
+
+const nikkes = getAllNikkes();
+// 2. Génération dynamique des listes d'options sans doublons
+const uniqueElements = [...new Set(nikkes.map(n => n.element))].sort();
+const uniqueBursts = [...new Set(nikkes.map(n => n.burst))].sort();
+const uniqueClasses = [...new Set(nikkes.map(n => n.class))].sort();
+const uniqueWeapons = [...new Set(nikkes.map(n => n.weapon))].sort();
+
+// Spécialités : extraction des valeurs des objets {1: "...", 2: "..."}
+const allSpecs = nikkes.flatMap(n => Object.values(n.specialties));
+const uniqueSpecs = [...new Set(allSpecs)].sort();
+
+// 3. Fonction pour injecter les cases à cocher dans le HTML
+function generateCheckboxGroup(containerId, items, className) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = items.map(item => `
+    <label class="checkbox-label">
+      <input type="checkbox" class="${className}" value="${item}">
+      <span>${item}</span>
+    </label>
+  `).join('');
+}
+
+// Initialisation des filtres dans leurs conteneurs HTML respectifs
+function initFilters() {
+    generateCheckboxGroup("filter-element-container", uniqueElements, "filter-element");
+    generateCheckboxGroup("filter-burst-container", uniqueBursts, "filter-burst");
+    generateCheckboxGroup("filter-class-container", uniqueClasses, "filter-class");
+    generateCheckboxGroup("filter-weapon-container", uniqueWeapons, "filter-weapon");
+    generateCheckboxGroup("filter-specialty-container", uniqueSpecs, "filter-specialty");
+
+    // Ajout des écouteurs d'événements sur toutes les cases à cocher générées
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', applyAllFilters);
+    });
+}
+
+// 4. Fonction de filtrage globale
+function applyAllFilters() {
+    // Récupération des valeurs cochees
+    const selectedElements = Array.from(document.querySelectorAll('.filter-element:checked')).map(cb => cb.value);
+    const selectedBursts = Array.from(document.querySelectorAll('.filter-burst:checked')).map(cb => cb.value);
+    const selectedClasses = Array.from(document.querySelectorAll('.filter-class:checked')).map(cb => cb.value);
+    const selectedWeapons = Array.from(document.querySelectorAll('.filter-weapon:checked')).map(cb => cb.value);
+    const selectedSpecs = Array.from(document.querySelectorAll('.filter-specialty:checked')).map(cb => cb.value);
+
+    const treasureOnlyEl = document.getElementById('filter-treasure');
+    const treasureOnly = treasureOnlyEl ? treasureOnlyEl.checked : false;
+
+    // Filtrage du tableau de données
+    const filteredNikkes = nikkes.filter(nikke => {
+        // Condition Élément
+        const matchElement = selectedElements.length === 0 || selectedElements.includes(nikke.element);
+
+        // Condition Burst
+        const matchBurst = selectedBursts.length === 0 || selectedBursts.includes(nikke.burst);
+
+        // Condition Classe
+        const matchClass = selectedClasses.length === 0 || selectedClasses.includes(nikke.class);
+
+        // Condition Arme
+        const matchWeapon = selectedWeapons.length === 0 || selectedWeapons.includes(nikke.weapon);
+
+        // Condition Treasure
+        const matchTreasure = !treasureOnly || nikke.treasure !== "no";
+
+        // Condition Spécialités (gestion de "Sustained" global + choix précis)
+        const listNikkeSpecs = Object.values(nikke.specialties);
+        const matchSpecialty = selectedSpecs.length === 0 || listNikkeSpecs.some(nikkeSpec => {
+            return selectedSpecs.some(selected => {
+                if (selected === "Sustained") {
+                    return nikkeSpec.includes("Sustained"); // Matche n'importe quelle spécialité contenant "Sustained"
+                }
+                return nikkeSpec === selected; // Correspondance exacte pour les autres
+            });
+        });
+
+        return matchElement && matchBurst && matchClass && matchWeapon && matchTreasure && matchSpecialty;
+    });
+
+    // Affichage des résultats filtrés
+    renderTable(filteredNikkes);
+}
+
+// 5. Rendu haute performance du tableau (mises à jour DOM instantanées)
+function renderTable(data) {
+    const tbody = document.getElementById("nikke-body");
+    if (!tbody) return;
+
+    const rowsHtml = data.map(nikke => {
+        const imgUrl = `https://nkas.pages.dev/characters/si_${nikke.character_id}_s.png`;
+        const specsList = Object.values(nikke.specialties).join(", ");
+
+        return `<tr><td>
+            <img src="${imgUrl}" alt="${nikke.name}" width="40" height="40" 
+            onerror="this.src='https://nkas.pages.dev/characters_missing_si/si_${nikke.character_id}_s.png';"
+            />
+            </td>
+            <td><b>${nikke.name}</b></td>
+            <td>${nikke.burst}</td>
+            <td>${nikke.element}</td>
+            <td>${nikke.class}</td>
+            <td>${nikke.weapon}</td>
+            <td>${nikke.treasure !== "no" ? "Oui" : "Non"}</td>
+            <td>${specsList}</td>
+            </tr>`;
+    }).join("");
+
+    tbody.innerHTML = rowsHtml;
+}
+
+// 6. Lancement au chargement de la page
+document.addEventListener("DOMContentLoaded", () => {
+    initFilters();
+    renderTable(nikkes);
+});

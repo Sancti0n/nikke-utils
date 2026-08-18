@@ -17,6 +17,12 @@ Le kit de développement (SDK) non-officiel et complet pour les développeurs tr
 
 ---
 
+## 🇬🇧 Filtering demo / 🇫🇷 Démo du filtrage
+
+https://Sancti0n.github.io/nikke-utils/
+
+---
+
 ## 🇬🇧 Key Features / 🇫🇷 Fonctionnalités Clés
 
 * **🇺🇸 Data Explorer:** Direct access to Nikke stats, Burst levels, and affiliations.

@@ -3,17 +3,18 @@ import {
     getNikkeByName,
     getAllSpecialties,
     getAllNikkesWithThisSpecialtie,
-    getAllNikkesWithThisField,
-    pullTen,
-    checkFullBurst
-} from '../index.js';
+    getAllNikkesWithThisField
+} from '../src/data/characters.js';
+
+import { pullTen } from '../src/gacha/simulator.js';
+import { checkFullBurst } from '../src/team/synergy.js';
 
 let currentNikkesData = [];
 let sortColumn = 'name'; // Tri par défaut sur 'name'
 let sortDirection = 'asc';
 
 // Définir les colonnes à afficher (y compris les colonnes triables)
-const columns = ['id', 'name', 'rarity', 'burst', 'element', 'manufacturer', 'class', 'weapon', 'squad', 'specialties', 'treasure', 'reEnterBurstSkill', 'canChangeBurstStageThreeToOne', 'cooldown', 'dateAdded'];
+const columns = ['id', 'character_id', 'name', 'rarity', 'burst', 'element', 'manufacturer', 'class', 'weapon', 'squad', 'specialties', 'treasure', 'reEnterBurstSkill', 'canChangeBurstStageThreeToOne', 'cooldown', 'dateAdded'];
 
 // ----------------------------------------------------
 // LOGIQUE DE TRI
@@ -83,12 +84,12 @@ function renderTable(data, sortedCol, sortedDir) {
     // Création de l'en-tête
     columns.forEach(col => {
         const headerText = col.charAt(0).toUpperCase() + col.slice(1);
-
+        //console.log(col)
         let className = '';
         if (col === sortedCol) { // Si c'est la colonne triée
             className = `sorted-${sortedDir}`; // Applique la classe sorted-asc ou sorted-desc
         }
-
+        //console.log(col, className, headerText)
         // Ajout de l'attribut data-column pour le tri
         html += `<th data-column="${col}" class="${className}">${headerText}</th>`;
     });
@@ -110,7 +111,14 @@ function renderTable(data, sortedCol, sortedDir) {
             if (col === 'rarity') {
                 className = `rarity-${nikke[col]}`;
             }
+            console.log(col)
+            if (col === "character_id") {
+                const imgUrl = `https://nkas.pages.dev/characters/si_${cellContent}_s.png`;
+                const fallbackUrl = `https://nkas.pages.dev/characters_missing_si/si_${cellContent}_s.png`;
 
+                cellContent = `<img src="${imgUrl}" alt="${nikke.name || 'Nikke'}" width="100" height="100" onerror="this.onerror=null; this.src='${fallbackUrl}';" />`;
+            }
+            //console.log("className, cellContent", className, cellContent)
             html += `<td class="${className}">${cellContent}</td>`;
         });
 
@@ -169,13 +177,13 @@ document.getElementById('data-output').textContent = `On a mis en argument ${nam
 document.getElementById('data-output-all-specialties').textContent = JSON.stringify(getAllSpecialties(allData));
 
 // getAllElementOfThisField()
-let field = "Pierce";
+let field = "Sustained Self Buffer";
 let liste = getAllNikkesWithThisSpecialtie(field);
 allNikkes = "";
 for (let i = 0; i < liste.length; i++) {
     allNikkes += JSON.stringify(liste[i]) + "\n";
 }
-document.getElementById('data-output-all-nikke-with-this-specialtie').textContent = allNikkes;
+document.getElementById('data-output-all-nikke-with-this-specialtie').textContent = field + "\n\n" + allNikkes;
 
 // getAllNikkesWithThisField()
 let champ1 = "element";
@@ -185,7 +193,7 @@ let stGetAllNikkesWithThisField = "";
 for (let i = 0; i < listeGetAllNikkesWithThisField.length; i++) {
     stGetAllNikkesWithThisField += JSON.stringify(listeGetAllNikkesWithThisField[i]) + "\n";
 }
-document.getElementById('data-output-all-nikke-with-this-field').textContent = stGetAllNikkesWithThisField;
+document.getElementById('data-output-all-nikke-with-this-field').textContent = champ2 + "\n\n" + stGetAllNikkesWithThisField;
 
 
 /*

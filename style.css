@@ -1,0 +1,188 @@
+/* --- Variables Thème Sombre --- */
+:root {
+    --bg-color: #0b0f19;
+    /* Fond très sombre */
+    --card-bg: #151c2c;
+    /* Fond des conteneurs */
+    --text-main: #f1f5f9;
+    /* Texte clair */
+    --text-muted: #8b98a9;
+    /* Titres de filtres */
+    --primary: #3b82f6;
+    /* Bleu accent */
+    --primary-hover: #60a5fa;
+    --primary-light: rgba(59, 130, 246, 0.2);
+    --badge-bg: #1e293b;
+    /* Fond des badges */
+    --badge-hover: #2a374e;
+    --border-color: #243044;
+    /* Bordures */
+    --radius: 8px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Base & Reset --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.4;
+    padding: 1.5rem;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+/* --- Carte de Filtres Ultra-Compacte --- */
+.filters-card {
+    background: var(--card-bg);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+
+    /* Alignement vertical des rangées */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* Espacement minimal entre les lignes de filtres */
+}
+
+/* --- Ligne de Filtre (Titre à gauche, Badges à droite) --- */
+.filter-group {
+    display: flex;
+    align-items: center;
+    /* Aligne le titre et les boutons sur le même axe horizontal */
+    gap: 1rem;
+}
+
+.filter-group h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    min-width: 95px;
+    /* Largeur fixe pour aligner verticalement le début des badges */
+    flex-shrink: 0;
+    margin: 0;
+}
+
+/* --- Conteneur des Badges en Ligne --- */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permet au contenu de passer à la ligne seulement si nécessaire */
+    gap: 0.35rem;
+    /* Espace très resserré entre chaque badge */
+    flex-grow: 1;
+}
+
+/* --- Style des Badges / Checkboxes --- */
+.checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.55rem;
+    /* Rembourrage très compact */
+    background-color: var(--badge-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 0.8rem;
+    color: var(--text-main);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease-in-out;
+}
+
+.checkbox-label:hover {
+    background-color: var(--badge-hover);
+    border-color: #3b4d68;
+}
+
+/* Badge actif / coché */
+.checkbox-label:has(input:checked) {
+    background-color: var(--primary-light);
+    border-color: var(--primary);
+    color: var(--primary-hover);
+    font-weight: 600;
+    box-shadow: 0 0 6px rgba(59, 130, 246, 0.25);
+}
+
+.checkbox-label input[type="checkbox"] {
+    accent-color: var(--primary);
+    width: 0.8rem;
+    height: 0.8rem;
+    cursor: pointer;
+}
+
+/* Focus visible pour l'accessibilité au clavier */
+.checkbox-label input:focus-visible {
+    outline: 2px solid var(--primary);
+}
+
+/* --- Tableau Sombre --- */
+.table-wrapper {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.85rem;
+}
+
+thead {
+    background-color: #0f172a;
+    border-bottom: 2px solid var(--border-color);
+}
+
+th {
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+}
+
+td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td img {
+    border-radius: 6px;
+    object-fit: cover;
+    background-color: #0f172a;
+    border: 1px solid var(--border-color);
+}

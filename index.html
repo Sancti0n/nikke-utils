@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Filtre Nikke</title>
+    <link rel="icon" type="image/x-icon" href="snow-white.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Filtres</h2>
+
+        <div class="filters-card">
+            <div class="filter-group">
+                <h3>Élément</h3>
+                <div id="filter-element-container" class="checkbox-group"></div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Burst</h3>
+                <div id="filter-burst-container" class="checkbox-group"></div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Classe</h3>
+                <div id="filter-class-container" class="checkbox-group"></div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Arme</h3>
+                <div id="filter-weapon-container" class="checkbox-group"></div>
+            </div>
+
+            <div class="filter-group full-width">
+                <h3>Spécialités</h3>
+                <div id="filter-specialty-container" class="checkbox-group"></div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Autre</h3>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="filter-treasure">
+                    <span>Treasure uniquement</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Icône</th>
+                        <th>Nom</th>
+                        <th>Burst</th>
+                        <th>Élément</th>
+                        <th>Classe</th>
+                        <th>Arme</th>
+                        <th>Treasure</th>
+                        <th>Spécialités</th>
+                    </tr>
+                </thead>
+                <tbody id="nikke-body"></tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Lien vers ton fichier JS ou balise <script> -->
+    <script type="module" src="./index.js"></script>
+</body>
+
+</html>
