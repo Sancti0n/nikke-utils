@@ -192,3 +192,11 @@ console.log(`Team Status: ${analysis.message}`);
 * **`Crowd Controller`**
     * 🇬🇧 Restricts enemy actions or mobility (Stun, Repulsion).
     * 🇫🇷 Entrave les mouvements/actions des ennemis.
+
+### HP Scaling & HP Buffs (Gestion & Conversion des PV)
+* **`Max HP Buffer`**
+    * 🇬🇧 Increases Max HP for allies or self.
+    * 🇫🇷 Augmente les PV Max des alliés ou du lanceur.
+* **`HP Scaling DPS`**
+    * 🇬🇧 Converts Max HP into ATK or scales damage output based on Max HP.
+    * 🇫🇷 Transforme les PV Max en ATK ou augmente ses dégâts en fonction des PV Max.

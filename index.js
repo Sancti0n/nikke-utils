@@ -2,14 +2,13 @@
 
 import { getAllNikkes } from './src/data/characters.js';
 
-console.log(getAllNikkes())
-
 const nikkes = getAllNikkes();
 // 2. Génération dynamique des listes d'options sans doublons
 const uniqueElements = [...new Set(nikkes.map(n => n.element))].sort();
 const uniqueBursts = [...new Set(nikkes.map(n => n.burst))].sort();
 const uniqueClasses = [...new Set(nikkes.map(n => n.class))].sort();
 const uniqueWeapons = [...new Set(nikkes.map(n => n.weapon))].sort();
+const uniqueCooldown = [...new Set(nikkes.map(n => Object.values(n.cooldown)[0]))].sort((a, b) => a - b);
 
 // Spécialités : extraction des valeurs des objets {1: "...", 2: "..."}
 const allSpecs = nikkes.flatMap(n => Object.values(n.specialties));
@@ -35,6 +34,7 @@ function initFilters() {
     generateCheckboxGroup("filter-class-container", uniqueClasses, "filter-class");
     generateCheckboxGroup("filter-weapon-container", uniqueWeapons, "filter-weapon");
     generateCheckboxGroup("filter-specialty-container", uniqueSpecs, "filter-specialty");
+    generateCheckboxGroup("filter-cooldown-container", uniqueCooldown, "filter-cooldown");
 
     // Ajout des écouteurs d'événements sur toutes les cases à cocher générées
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
@@ -50,6 +50,7 @@ function applyAllFilters() {
     const selectedClasses = Array.from(document.querySelectorAll('.filter-class:checked')).map(cb => cb.value);
     const selectedWeapons = Array.from(document.querySelectorAll('.filter-weapon:checked')).map(cb => cb.value);
     const selectedSpecs = Array.from(document.querySelectorAll('.filter-specialty:checked')).map(cb => cb.value);
+    const selectedCooldown = Array.from(document.querySelectorAll('.filter-cooldown:checked')).map(cb => Number(cb.value));
 
     const treasureOnlyEl = document.getElementById('filter-treasure');
     const treasureOnly = treasureOnlyEl ? treasureOnlyEl.checked : false;
@@ -68,21 +69,19 @@ function applyAllFilters() {
         // Condition Arme
         const matchWeapon = selectedWeapons.length === 0 || selectedWeapons.includes(nikke.weapon);
 
+        // Condition Cooldown
+        const matchCooldown = selectedCooldown.length === 0 || Object.values(nikke.cooldown).some(cd => {
+            return selectedCooldown.includes(cd);
+        });
+
         // Condition Treasure
         const matchTreasure = !treasureOnly || nikke.treasure !== "no";
 
-        // Condition Spécialités (gestion de "Sustained" global + choix précis)
+        // Condition Spécialités
         const listNikkeSpecs = Object.values(nikke.specialties);
-        const matchSpecialty = selectedSpecs.length === 0 || listNikkeSpecs.some(nikkeSpec => {
-            return selectedSpecs.some(selected => {
-                if (selected === "Sustained") {
-                    return nikkeSpec.includes("Sustained"); // Matche n'importe quelle spécialité contenant "Sustained"
-                }
-                return nikkeSpec === selected; // Correspondance exacte pour les autres
-            });
-        });
+        const matchSpecialty = selectedSpecs.length === 0 || listNikkeSpecs.some(spec => selectedSpecs.includes(spec));
 
-        return matchElement && matchBurst && matchClass && matchWeapon && matchTreasure && matchSpecialty;
+        return matchElement && matchBurst && matchClass && matchWeapon && matchTreasure && matchSpecialty && matchCooldown;
     });
 
     // Affichage des résultats filtrés
@@ -97,6 +96,7 @@ function renderTable(data) {
     const rowsHtml = data.map(nikke => {
         const imgUrl = `https://nkas.pages.dev/characters/si_${nikke.character_id}_s.png`;
         const specsList = Object.values(nikke.specialties).join(", ");
+        const valueCooldown = Object.values(nikke.cooldown)[0];
 
         return `<tr><td>
             <img src="${imgUrl}" alt="${nikke.name}" width="40" height="40" 
@@ -108,8 +108,10 @@ function renderTable(data) {
             <td>${nikke.element}</td>
             <td>${nikke.class}</td>
             <td>${nikke.weapon}</td>
-            <td>${nikke.treasure !== "no" ? "Oui" : "Non"}</td>
+            <td>${nikke.treasure == "no" ? "" : "Oui"}</td>
             <td>${specsList}</td>
+            <td>${valueCooldown}</td>
+            <td>${nikke.reEnterBurstSkill == "no" ? "" : "Oui"}</td>
             </tr>`;
     }).join("");
 
