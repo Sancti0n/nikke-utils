@@ -3,7 +3,7 @@
 import { getAllNikkes } from './src/data/characters.js';
 
 const nikkes = getAllNikkes();
-// 2. Génération dynamique des listes d'options sans doublons
+// Génération dynamique des listes d'options sans doublons
 const uniqueElements = [...new Set(nikkes.map(n => n.element))].sort();
 const uniqueBursts = [...new Set(nikkes.map(n => n.burst))].sort();
 const uniqueClasses = [...new Set(nikkes.map(n => n.class))].sort();
@@ -14,7 +14,7 @@ const uniqueCooldown = [...new Set(nikkes.map(n => Object.values(n.cooldown)[0])
 const allSpecs = nikkes.flatMap(n => Object.values(n.specialties));
 const uniqueSpecs = [...new Set(allSpecs)].sort();
 
-// 3. Fonction pour injecter les cases à cocher dans le HTML
+// Fonction pour injecter les cases à cocher dans le HTML
 function generateCheckboxGroup(containerId, items, className) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -42,7 +42,7 @@ function initFilters() {
     });
 }
 
-// 4. Fonction de filtrage globale
+// Fonction de filtrage globale
 function applyAllFilters() {
     // Récupération des valeurs cochees
     const selectedElements = Array.from(document.querySelectorAll('.filter-element:checked')).map(cb => cb.value);
@@ -88,7 +88,7 @@ function applyAllFilters() {
     renderTable(filteredNikkes);
 }
 
-// 5. Rendu haute performance du tableau (mises à jour DOM instantanées)
+// Rendu haute performance du tableau (mises à jour DOM instantanées)
 function renderTable(data) {
     const tbody = document.getElementById("nikke-body");
     if (!tbody) return;
@@ -118,7 +118,7 @@ function renderTable(data) {
     tbody.innerHTML = rowsHtml;
 }
 
-// 6. Lancement au chargement de la page
+// Lancement au chargement de la page
 document.addEventListener("DOMContentLoaded", () => {
     initFilters();
     renderTable(nikkes);
