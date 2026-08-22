@@ -1,22 +1,15 @@
 /* --- Variables Thème Sombre --- */
 :root {
     --bg-color: #0b0f19;
-    /* Fond très sombre */
     --card-bg: #151c2c;
-    /* Fond des conteneurs */
     --text-main: #f1f5f9;
-    /* Texte clair */
     --text-muted: #8b98a9;
-    /* Titres de filtres */
     --primary: #3b82f6;
-    /* Bleu accent */
     --primary-hover: #60a5fa;
     --primary-light: rgba(59, 130, 246, 0.2);
     --badge-bg: #1e293b;
-    /* Fond des badges */
     --badge-hover: #2a374e;
     --border-color: #243044;
-    /* Bordures */
     --radius: 8px;
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
@@ -56,19 +49,39 @@ h2 {
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow);
     margin-bottom: 1.5rem;
-
-    /* Alignement vertical des rangées */
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    /* Espacement minimal entre les lignes de filtres */
 }
 
-/* --- Ligne de Filtre (Titre à gauche, Badges à droite) --- */
+/* --- Première ligne regroupée (Élément | Burst | Classe) --- */
+.filter-row-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.2rem;
+}
+
+.filter-row-inline .filter-group {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Barre verticale entre Élément, Burst et Classe */
+.filter-row-inline .filter-group:not(:last-child) {
+    border-right: 1px solid var(--border-color);
+    padding-right: 1.25rem;
+}
+
+/* --- Lignes de Filtre Standard --- */
 .filter-group {
     display: flex;
     align-items: center;
-    /* Aligne le titre et les boutons sur le même axe horizontal */
     gap: 1rem;
 }
 
@@ -78,18 +91,22 @@ h2 {
     letter-spacing: 0.05em;
     color: var(--text-muted);
     min-width: 95px;
-    /* Largeur fixe pour aligner verticalement le début des badges */
     flex-shrink: 0;
     margin: 0;
+}
+
+/* Séparateur horizontal pour les autres filtres verticaux */
+.filters-card>.filter-group:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 /* --- Conteneur des Badges en Ligne --- */
 .checkbox-group {
     display: flex;
     flex-wrap: wrap;
-    /* Permet au contenu de passer à la ligne seulement si nécessaire */
     gap: 0.35rem;
-    /* Espace très resserré entre chaque badge */
     flex-grow: 1;
 }
 
@@ -99,7 +116,6 @@ h2 {
     align-items: center;
     gap: 0.35rem;
     padding: 0.2rem 0.55rem;
-    /* Rembourrage très compact */
     background-color: var(--badge-bg);
     border: 1px solid var(--border-color);
     border-radius: 5px;
@@ -131,7 +147,6 @@ h2 {
     cursor: pointer;
 }
 
-/* Focus visible pour l'accessibilité au clavier */
 .checkbox-label input:focus-visible {
     outline: 2px solid var(--primary);
 }

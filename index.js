@@ -79,7 +79,7 @@ function applyAllFilters() {
 
         // Condition Spécialités
         const listNikkeSpecs = Object.values(nikke.specialties);
-        const matchSpecialty = selectedSpecs.length === 0 || listNikkeSpecs.some(spec => selectedSpecs.includes(spec));
+        const matchSpecialty = selectedSpecs.length === 0 || selectedSpecs.every(spec => listNikkeSpecs.includes(spec));
 
         return matchElement && matchBurst && matchClass && matchWeapon && matchTreasure && matchSpecialty && matchCooldown;
     });
