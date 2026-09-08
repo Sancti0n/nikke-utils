@@ -84,15 +84,14 @@ function applyAllFilters() {
         return matchElement && matchBurst && matchClass && matchWeapon && matchTreasure && matchSpecialty && matchCooldown;
     });
 
-    // Affichage des résultats filtrés
     renderTable(filteredNikkes);
 }
 
-// Rendu haute performance du tableau (mises à jour DOM instantanées)
 function renderTable(data) {
     const tbody = document.getElementById("nikke-body");
     if (!tbody) return;
 
+    // https://nkas.pages.dev/nk_data/blablalink/nikke_list.json
     const rowsHtml = data.map(nikke => {
         const imgUrl = `https://nkas.pages.dev/characters/si_${nikke.character_id}_s.png`;
         const specsList = Object.values(nikke.specialties).join(", ");
@@ -118,7 +117,6 @@ function renderTable(data) {
     tbody.innerHTML = rowsHtml;
 }
 
-// Lancement au chargement de la page
 document.addEventListener("DOMContentLoaded", () => {
     initFilters();
     renderTable(nikkes);
