@@ -116,13 +116,13 @@ console.log(`Team Status: ${analysis.message}`);
     * 🇬🇧 Applies Damage over Time (DoT) effects (Burn, Poison, Hacked, etc.) to enemies every second.
     * 🇫🇷 Inflige des dégâts continus (DoT) aux ennemis à intervalles réguliers (Brûlure, Poison, etc.).
 * **`Sustained Self Buffer`**
-    * 🇬🇧 Boosts own Sustained Damage stats (`Sustained Damage ▲`) to amplify personal DoT ticks.
+    * 🇬🇧 Boosts own Sustained Damage stats `Sustained Damage ▲` to amplify personal DoT ticks.
     * 🇫🇷 Augmente sa propre statistique de dégâts continus pour démultiplier la puissance de ses propres tics.
 * **`Sustained Team Buffer`**
     * 🇬🇧 Grants a team-wide or ally-specific `Sustained Damage ▲` buff to empower the whole team's DoT output.
     * 🇫🇷 Accorde un bonus de dégâts continus à toute l'équipe pour amplifier les tics de tous les alliés.
 * **`Sustained Damage Reducer`**
-    * 🇬🇧 Reduces incoming Sustained Damage (`Sustained Damage ▼`) inflicted by enemies on allies.
+    * 🇬🇧 Reduces incoming Sustained Damage `Sustained Damage ▼` inflicted by enemies on allies.
     * 🇫🇷 Réduit les dégâts continus subis par l'équipe (contre les brûlures ou poisons des boss).
 
 ### Special Damage Types (Types de Dégâts Spéciaux)
@@ -138,6 +138,12 @@ console.log(`Team Status: ${analysis.message}`);
 * **`Buffer Distributed Damage`**
     * 🇬🇧 Boosts allies' Distributed Damage output.
     * 🇫🇷 Augmente les dégâts répartis des alliés.
+* **`Explosion Radius`**
+    * 🇬🇧 Increases the explosion range or AoE splash area of attacks.
+    * 🇫🇷 Augmente le rayon d'explosion ou la zone d'effet (AoE) des attaques.
+* **`Projectile Explosion Damage`**
+    * 🇬🇧 Boosts damage dealt specifically by projectile splash explosions.
+    * 🇫🇷 Augmente les dégâts infligés par l'explosion des projectiles.
 
 ### Defense, Healing & Survival (Défense, Soins & Survie)
 * **`Healer`**
@@ -155,6 +161,9 @@ console.log(`Team Status: ${analysis.message}`);
 * **`Revive`**
     * 🇬🇧 Resurrects a fallen ally during battle.
     * 🇫🇷 Réanime un allié tombé au combat.
+* **`Damage Taken`**
+    * 🇬🇧 Increases incoming damage taken by enemies or reduces damage taken by allies.
+    * 🇫🇷 Augmente les dégâts subis par les ennemis (amplificateur de DPS) ou réduit les dégâts subis par l'équipe.
 
 ### Buffs, Utility & Synergies (Support, Utilité & Synergies)
 * **`Buffer`**
