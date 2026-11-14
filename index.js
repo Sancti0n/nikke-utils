@@ -4,14 +4,17 @@ import { getAllNikkes } from './src/data/characters.js';
 
 const nikkes = getAllNikkes();
 // Génération dynamique des listes d'options sans doublons
-const uniqueElements = [...new Set(nikkes.map(n => n.element))].sort();
-const uniqueBursts = [...new Set(nikkes.map(n => n.burst))].sort();
-const uniqueClasses = [...new Set(nikkes.map(n => n.class))].sort();
-const uniqueWeapons = [...new Set(nikkes.map(n => n.weapon))].sort();
-const uniqueCooldown = [...new Set(nikkes.map(n => Object.values(n.cooldown)[0]))].sort((a, b) => a - b);
+const uniqueElements = [...new Set(nikkes.map(n => n.element).filter(Boolean))].sort();
+const uniqueBursts = [...new Set(nikkes.map(n => n.burst).filter(Boolean))].sort();
+const uniqueClasses = [...new Set(nikkes.map(n => n.class).filter(Boolean))].sort();
+const uniqueWeapons = [...new Set(nikkes.map(n => n.weapon).filter(Boolean))].sort();
+const uniqueManufacturers = [...new Set(nikkes.map(n => n.manufacturer).filter(Boolean))].sort();
+const uniqueCooldown = [...new Set(
+    nikkes.map(n => Object.values(n.cooldown)[0]).filter(val => val !== undefined && val !== "")
+)].sort((a, b) => a - b);
 
 // Spécialités : extraction des valeurs des objets {1: "...", 2: "..."}
-const allSpecs = nikkes.flatMap(n => Object.values(n.specialties));
+const allSpecs = nikkes.flatMap(n => Object.values(n.specialties)).filter(Boolean);
 const uniqueSpecs = [...new Set(allSpecs)].sort();
 
 // Fonction pour injecter les cases à cocher dans le HTML
@@ -33,6 +36,7 @@ function initFilters() {
     generateCheckboxGroup("filter-burst-container", uniqueBursts, "filter-burst");
     generateCheckboxGroup("filter-class-container", uniqueClasses, "filter-class");
     generateCheckboxGroup("filter-weapon-container", uniqueWeapons, "filter-weapon");
+    generateCheckboxGroup("filter-manufacturer-container", uniqueManufacturers, "filter-manufacturer");
     generateCheckboxGroup("filter-specialty-container", uniqueSpecs, "filter-specialty");
     generateCheckboxGroup("filter-cooldown-container", uniqueCooldown, "filter-cooldown");
 
@@ -49,6 +53,7 @@ function applyAllFilters() {
     const selectedBursts = Array.from(document.querySelectorAll('.filter-burst:checked')).map(cb => cb.value);
     const selectedClasses = Array.from(document.querySelectorAll('.filter-class:checked')).map(cb => cb.value);
     const selectedWeapons = Array.from(document.querySelectorAll('.filter-weapon:checked')).map(cb => cb.value);
+    const selectedManufacturers = Array.from(document.querySelectorAll('.filter-manufacturer:checked')).map(cb => cb.value);
     const selectedSpecs = Array.from(document.querySelectorAll('.filter-specialty:checked')).map(cb => cb.value);
     const selectedCooldown = Array.from(document.querySelectorAll('.filter-cooldown:checked')).map(cb => Number(cb.value));
 
@@ -69,6 +74,9 @@ function applyAllFilters() {
         // Condition Arme
         const matchWeapon = selectedWeapons.length === 0 || selectedWeapons.includes(nikke.weapon);
 
+        // Condition Manufacture
+        const matchManufacturer = selectedManufacturers.length === 0 || selectedManufacturers.includes(nikke.manufacturer);
+
         // Condition Cooldown
         const matchCooldown = selectedCooldown.length === 0 || Object.values(nikke.cooldown).some(cd => {
             return selectedCooldown.includes(cd);
@@ -81,7 +89,7 @@ function applyAllFilters() {
         const listNikkeSpecs = Object.values(nikke.specialties);
         const matchSpecialty = selectedSpecs.length === 0 || selectedSpecs.every(spec => listNikkeSpecs.includes(spec));
 
-        return matchElement && matchBurst && matchClass && matchWeapon && matchTreasure && matchSpecialty && matchCooldown;
+        return matchElement && matchBurst && matchClass && matchWeapon && matchManufacturer && matchTreasure && matchSpecialty && matchCooldown;
     });
 
     renderTable(filteredNikkes);
@@ -94,24 +102,27 @@ function renderTable(data) {
     // https://nkas.pages.dev/nk_data/blablalink/nikke_list.json
     const rowsHtml = data.map(nikke => {
         const imgUrl = `https://nkas.pages.dev/characters/si_${nikke.character_id}_s.png`;
-        const specsList = Object.values(nikke.specialties).join(", ");
-        const valueCooldown = Object.values(nikke.cooldown)[0];
+        const specsList = Object.values(nikke.specialties).join(", ") || "";
+        const valueCooldown = Object.values(nikke.cooldown)[0] || "";
 
-        return `<tr><td>
-            <img src="${imgUrl}" alt="${nikke.name}" width="40" height="40" 
-            onerror="this.src='https://nkas.pages.dev/characters_missing_si/si_${nikke.character_id}_s.png';"
-            />
-            </td>
-            <td><b>${nikke.name}</b></td>
-            <td>${nikke.burst}</td>
-            <td>${nikke.element}</td>
-            <td>${nikke.class}</td>
-            <td>${nikke.weapon}</td>
-            <td>${nikke.treasure == "no" ? "" : "Oui"}</td>
-            <td>${specsList}</td>
-            <td>${valueCooldown}</td>
-            <td>${nikke.reEnterBurstSkill == "no" ? "" : "Oui"}</td>
-            </tr>`;
+        return `
+            <tr>
+                <td>
+                    <div class="avatar-wrapper">
+                        <img src="${imgUrl}" alt="${nikke.name || ""}" onerror="this.style.display='none';" />
+                    </div>
+                </td>
+        <td><b>${nikke.name || ""}</b></td>
+        <td>${nikke.burst || ""}</td>
+        <td>${nikke.element || ""}</td>
+        <td>${nikke.class || ""}</td>
+        <td>${nikke.manufacturer || ""}</td>
+        <td>${nikke.weapon || ""}</td>
+        <td>${nikke.treasure == "no" ? "" : "Oui"}</td>
+        <td>${specsList || ""}</td>
+        <td>${valueCooldown || ""}</td>
+        <td>${nikke.reEnterBurstSkill == "no" ? "" : "Oui"}</td>
+        </tr>`;
     }).join("");
 
     tbody.innerHTML = rowsHtml;
